@@ -1,0 +1,61 @@
+###############################
+## Frontend (Vite + React)
+###############################
+agri-oasis-market/node_modules/
+agri-oasis-market/dist/
+agri-oasis-market/.env
+agri-oasis-market/.vite/
+agri-oasis-market/.cache/
+
+agri-oasis-market/npm-debug.log*
+agri-oasis-market/yarn-debug.log*
+agri-oasis-market/yarn-error.log*
+agri-oasis-market/pnpm-debug.log*
+
+
+###############################
+## Backend (Spring Boot)
+###############################
+backend/target/
+backend/.mvn/
+backend/.settings/
+backend/.project
+backend/.classpath
+backend/*.iml
+backend/*.log
+
+
+###############################
+## Environment Variables
+###############################
+.env
+*.env
+.env.*
+
+
+###############################
+## IDE / Editors
+###############################
+.vscode/
+.idea/
+*.iws
+*.iml
+*.ipr
+.metadata/
+bin/
+tmp/
+*.tmp
+*.bak
+
+
+###############################
+## OS / Misc
+###############################
+.DS_Store
+Thumbs.db
+
+
+###############################
+## Docker
+###############################
+docker-compose.override.yml
