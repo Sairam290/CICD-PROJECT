@@ -13,9 +13,9 @@ spec:
       labels:
         app: frontend
     spec:
-      containers:
+        containers:
         - name: frontend
-          image: agri-oasis-frontend:latest
-          imagePullPolicy: IfNotPresent
+          image: ghcr.io/sairam290/agri-frontend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
