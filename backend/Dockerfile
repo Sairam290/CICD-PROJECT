@@ -1,17 +1,15 @@
 FROM maven:3.8.8-eclipse-temurin-21 AS build
 WORKDIR /build
 
-# copy pom + mvnw so the wrapper can bootstrap maven
-COPY pom.xml mvnw* ./
-COPY .mvn .mvn
-RUN if [ -f mvnw ]; then chmod +x mvnw; fi || true
+# copy pom.xml
+COPY pom.xml ./
 
 # Download dependencies to speed up later builds
-RUN if [ -f mvnw ]; then ./mvnw -B -q dependency:go-offline; else mvn -B -q dependency:go-offline; fi
+RUN mvn -B -q dependency:go-offline
 
 # copy source and build the jar
 COPY src ./src
-RUN if [ -f mvnw ]; then ./mvnw -B -q package -DskipTests; else mvn -B -q package -DskipTests; fi
+RUN mvn -B -q package -DskipTests
 
 FROM eclipse-temurin:21-jre
 WORKDIR /app
