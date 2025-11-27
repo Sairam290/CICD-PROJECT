@@ -1,13 +1,16 @@
-# Stage 1 — build
-FROM node:18-alpine AS builder
+FROM node:18-alpine AS build
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
 
-# Stage 2 — serve via nginx
+# install deps (supports bun if lockfile present)
+COPY package*.json ./
+COPY bun.lockb ./
+RUN if [ -f bun.lockb ]; then npm install -g bun && bun install || true; else npm ci || true; fi
+
+# copy source and build
+COPY . .
+RUN if [ -f bun.lockb ]; then bun run build; else npm run build; fi
+
 FROM nginx:stable-alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx","-g","daemon off;"]

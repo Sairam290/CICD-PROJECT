@@ -1,0 +1,10 @@
+---
+- name: Deploy Full Stack Application
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Build and start services with docker compose
+      command: docker compose up -d --build
+      args:
+        chdir: "{{ playbook_dir }}"
+      become: yes
